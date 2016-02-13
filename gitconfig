@@ -1,0 +1,10 @@
+[user]
+	name = Tom Denham
+	email = tom@tomdee.co.uk
+[core]
+	editor = vim
+	preloadindex = true
+[push]
+	default = current
+[alias]
+	up = "!git remote update -p; git merge --ff-only @{u}"
