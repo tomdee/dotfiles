@@ -63,3 +63,6 @@ fi
 }
 
 install_zsh
+
+#install thefuck
+sudo pip install thefuck --upgrade

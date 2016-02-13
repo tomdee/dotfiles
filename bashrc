@@ -105,9 +105,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-#. ~/gulfstream/gulfstream_aliases
-
-
 # ------------------------------------
 # Docker alias and function
 # ------------------------------------
@@ -159,9 +156,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # The next line enables shell command completion for gcloud.
-source '/home/gulfstream/google-cloud-sdk/completion.bash.inc'
-
-eval $(thefuck --alias)
+source $HOME/google-cloud-sdk/completion.bash.inc
 
 # The next line updates PATH for the Google Cloud SDK.
-source '/home/gulfstream/google-cloud-sdk/path.bash.inc'
+source $HOME/google-cloud-sdk/path.bash.inc
+
+eval $(thefuck --alias)
