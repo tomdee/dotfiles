@@ -4,6 +4,11 @@
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
 
+if [[ $EUID -ne 0 ]]; then
+     echo "This script must be run as root" 1>&2
+        exit 1
+fi
+
 ########## Variables
 
 dir=~/dotfiles                    # dotfiles directory
