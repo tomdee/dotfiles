@@ -67,7 +67,18 @@ else
 fi
 }
 
+install_quicktile() {
+  apt-get install -y python-gtk2 python-xlib python-dbus python-wnck
+  if [[ ! -e $dir/quicktile ]]; then
+    git clone https://github.com/ssokolow/quicktile $dir/quicktile
+    $dir/quicktile/quicktile.py
+    ln -s $dir/quicktile/quicktile.py /usr/local/bin
+    cp $dir/quicktile/quicktile.desktop  /etc/xdg/autostart/quicktile.desktop
+  fi
+}
+
 install_zsh
+install_quicktile
 
 # Install thefuck
 apt-get install -y python-pip
