@@ -156,9 +156,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # The next line enables shell command completion for gcloud.
-source $HOME/google-cloud-sdk/completion.bash.inc
+[[ -e $HOME/google-cloud-sdk/completion.bash.inc ]] && source $HOME/google-cloud-sdk/completion.bash.inc
 
 # The next line updates PATH for the Google Cloud SDK.
-source $HOME/google-cloud-sdk/path.bash.inc
+[[ -e $HOME/google-cloud-sdk/path.bash.inc ]] && source $HOME/google-cloud-sdk/path.bash.inc
 
 eval $(thefuck --alias)
