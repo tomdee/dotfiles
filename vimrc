@@ -18,6 +18,14 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible         " get rid of Vi compatibility mode. SET FIRST!
 
+" Load plugins from "bundle" directory 
+execute pathogen#infect()
+
+" Space as leader - https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+let mapleader = "\<Space>"
+
+iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -94,3 +102,28 @@ set nowrap                " don't wrap text
 
 " Prettify JSON files making them easier to read
 command PrettyJSON %!python -m json.tool
+
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+" Causes the GoBuild (/make) comomands to write the file first
+set autowrite
+
+
+" Use "quickfix" for all errors, instead of location lists.
+let g:go_list_type = "quickfix"
+
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
