@@ -24,7 +24,6 @@ execute pathogen#infect()
 " Space as leader - https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 let mapleader = "\<Space>"
 
-iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 02. Events                                                                 "
@@ -79,7 +78,8 @@ set nohlsearch            " Don't continue to highlight searched phrases.
 set incsearch             " But do highlight as you type your search.
 set ignorecase            " Make searches case-insensitive.
 set ruler                 " Always show info along bottom.
-set showmatch
+set noshowmatch
+:let loaded_matchparen = 1 
 set statusline=%<%f\%h%m%r%=%-20.(line=%l\ \ col=%c%V\ \ totlin=%L%)\ \ \%h%m%r%=%-40(bytval=0x%B,%n%Y%)\%P
 set visualbell
 
@@ -94,15 +94,18 @@ set shiftround            " always indent/outdent to the nearest tabstop
 set expandtab             " use spaces instead of tabs
 set smartindent           " automatically insert one extra level of indentation
 set smarttab              " use tabs at the start of a line, spaces elsewhere
-set nowrap                " don't wrap text
+set wrap                " do wrap text
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 06. Custom Commands                                                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Prettify JSON files making them easier to read
-command PrettyJSON %!python -m json.tool
+"command PrettyJSON %!python -m json.tool
 
+" Use goimports instead of gofmt
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
@@ -110,7 +113,6 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
 " Causes the GoBuild (/make) comomands to write the file first
 set autowrite
-
 
 " Use "quickfix" for all errors, instead of location lists.
 let g:go_list_type = "quickfix"
@@ -127,3 +129,52 @@ function! s:build_go_files()
 endfunction
 
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+" Highlight
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1  
+
+" Show type info for the word under your cursor
+au FileType go nmap <Leader>i <Plug>(go-info)
+
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Set minimum syntax keyword
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Can be typed even faster than jj.
+imap jk <Esc>
+
+
+set hidden
+set noswapfile
+" My keybinding
+" Insert the date - type xdate then <tab>
+iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")
+
+" Open a previously opened "buffer"
+map <leader>e :BufExplorer<cr>
+
+" Go specific
+set <m-R>=R
+au FileType go nmap <m-R> <Plug>(go-rename)
+
+
+
+
+
+

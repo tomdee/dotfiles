@@ -161,4 +161,4 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # The next line updates PATH for the Google Cloud SDK.
 [[ -e $HOME/google-cloud-sdk/path.bash.inc ]] && source $HOME/google-cloud-sdk/path.bash.inc
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)

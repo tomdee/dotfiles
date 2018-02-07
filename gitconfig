@@ -8,3 +8,9 @@
 	default = current
 [alias]
 	up = "!git remote update -p; git merge --ff-only @{u}"
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
+[tag]
+	gpgsign = true
